@@ -29,6 +29,7 @@ int IA::Minimax::alphaBeta(models::Board* board, int joueur)
 				copie->AddToken(i, 'Y');
 				joueur = 0;
 			}
+			copie->WinRules();
 			double valeurJeuCour = minimax(copie, joueur, this->profondeur);
 			if (valeurJeuCour > valeurJeu)
 			{
@@ -70,6 +71,7 @@ double IA::Minimax::min(models::Board* board, int joueur, int depth, double alph
 					copie->AddToken(i, 'Y');
 					joueur = 0;
 				}
+				copie->WinRules();
 				valeurJeu = std::min(valeurJeu, this->max(copie, joueur, depth - 1, alpha, beta));
 
 				if (alpha >= valeurJeu)
@@ -108,6 +110,7 @@ double IA::Minimax::max(models::Board* board, int joueur, int depth, double alph
 					copie->AddToken(i, 'Y');
 					joueur = 0;
 				}
+				copie->WinRules();
 				valJeu = std::max(valJeu, this->min(copie, joueur, depth - 1, alpha, beta));
 
 				if (beta <= valJeu)
